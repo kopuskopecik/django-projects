@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'lessons:baslik_listesi' %}">Başlıklarım</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'lessons:baslik_guncelle' baslik.pk %}">{{ baslik.title }}</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'lessons:ders_degistir' baslik.pk ders.pk %}">{{ ders.title }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Silme Onayı</li>
+    </ol>
+  </nav>
+  <h2 class="mb-3">Silme Onayı</h2>
+  <p class="lead"><strong>"{{ ders.title }}"</strong> Dersi silme istediğinize emin misiniz?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger btn-lg">Evet, eminim.</button>
+    <a href="{% url 'teachers:ders_degistir' baslik.pk ders.pk %}" class="btn btn-outline-secondary btn-lg" role="button">Vazgeç</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'ingilizce/base.html' %} 
+{% load static %}
+{% block sharethis %}
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d9dd46a171ad100126e2a5a&product=inline-share-buttons' async='async'></script>
+
+{% endblock %}
+{% block body %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class = "index">
+		{%if lessons%}
+		{% for lesson in lessons   %}
+		
+			<div class = "col col-md-6 col-sm-6 col-xs-12">
+				<ul class="list-group">
+					<a class ="index" href="{{lesson.get_absolute_url}}#disqus_thread"><li class="list-group-item">
+						<span class="badge">{{lesson.number}}</span>
+					{{lesson.headline}}
+					</li></a>
+				</ul>
+			</div>
+		{%  endfor  %}
+		{% else %}
+		<h1 class = "text-center">There is no matching</h1>
+		{% endif %}
+		<div class="sharethis-inline-share-buttons mb-1"></div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

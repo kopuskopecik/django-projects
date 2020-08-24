@@ -1,0 +1,91 @@
+.content {
+  min-height: calc(100vh - 50px);
+}
+.footer {
+  height: 50px;
+  background-color: #dc3545;
+  color:#fff;
+}
+
+.reklam {
+	width: 50%;
+}
+
+.nav-alti {
+	background-color: hsl(354, 80%, 64%);
+	
+}
+
+.breadcrumb-arka-plan {
+	background-color: hsl(354, 90%, 74%);
+}
+
+.ana-sayfa-ders-linkleri {
+	font-size: 26px;
+}
+
+.index-arka-plan{
+	background-color: #bee5eb;
+	color: #0c5460;
+}
+
+.headline {
+	position:relative;
+}
+
+.sag-button {
+	position:absolute;
+	right: 0;
+	top: 2px;
+}
+
+.sol-button {
+	position:absolute;
+	left: 0;
+	top:2px;
+}
+
+
+@media (max-width: 767px) {
+
+.liste {
+	max-height: 35vh;
+	overflow: auto;
+	margin-left:5px;
+	margin-top: 3px;
+	margin-top: 13px!important;
+}
+
+.nav-alti {
+	font-size: 0.75rem;
+}
+
+}
+
+@media (min-width: 767px) {
+
+.liste, .icerik {
+	max-height: 100vh;
+	overflow: auto;
+}
+
+
+
+}
+
+@media (max-width: 500px) {
+
+.liste {
+	max-height: 35vh;
+	overflow: auto;
+	margin-left:5px;
+	margin-top: 13px!important;
+}
+
+
+.breadcrumb-detail{
+	display:none;
+}
+
+
+}

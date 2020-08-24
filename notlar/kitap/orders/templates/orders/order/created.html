@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Alışverişiniz tamamlandı.
+{% endblock %}
+
+{% block content %}
+<div class="alert alert-success" role="alert">
+  <h4 class="alert-heading">Siparişiniz alındı!</h4>
+  <p>Bizi tercih ettiğiniz için teşekkür ederiz!</p>
+  <hr>
+  <p class="mb-0">Siparişiniz başarıyla gerçekleştirildi. Sipariş numaranız <strong>{{ order.id }}</strong>.</p>
+{% endblock %}

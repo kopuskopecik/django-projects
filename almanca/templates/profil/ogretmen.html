@@ -1,0 +1,29 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block body %}
+<div class = "container">
+	<ul class="list-group list-group-horizontal-sm">
+		<a href = "{% url 'profil:ogretmen_profil' ogretmen_id %}" class="list-group-item {{active}}">Başlıklar</a>
+		<a class="list-group-item">Profil</a>
+		<a class="list-group-item">Şu Bu</a>
+	</ul>
+
+	{% for baslik in basliklar %}
+	
+		<div class = "card mt-2 bg-dark">
+		<a href = "{{baslik.get_absolute_url}}"><h4 class = "text-white">{{baslik.title}}</h4></a>
+        <small class = "text-right text-secondary">{{baslik.owner.username}} - {{baslik.publishing_date|date:"d M y"}}</small>
+		<div class = "text-center">
+			<button type = "button" class="btn btn-info btn-sm" data-toggle="tooltip" data-placement="top" title = "Görüntülenme Sayısı"> <i class ="fas fa-eye"></i> {{baslik.views}}</button>
+			<button type = "button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title = "Favorilere Ekle"> <i class ="far fa-star"></i></button>
+			<button type = "button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title = "Beğen"> <i class ="far fa-heart"></i></button>
+		</div>
+		
+		</div>
+	
+	{% endfor %}
+</div>
+
+{% endblock %}

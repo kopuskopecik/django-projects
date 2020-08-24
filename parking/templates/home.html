@@ -1,0 +1,43 @@
+{% load random_integer %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            display:flex;
+            justify-content: space-between;
+            padding: 10 10;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Django Backend Take Home Project.</h1>
+    {% for slot in slots %}
+    {% random_int 1 slot_length as randint %}
+        <div>
+            <a id = "overflow-link" target= "_blank"href="{% url 'cars:parking_info' slot.pk %}">Slot-{{slot.pk}} info</a>
+            {% if slot.empty %} 
+               <a href="{% url 'cars:park' randint %}">Park here</a>
+            {% else %}
+               <a href="{% url 'cars:unpark' slot.pk %}">Unpark</a> 
+               <span>Car-{{slot.car.pk}}</span>
+                    
+            {% endif %}
+            <button  onclick="myFunction()">Overflow for 10 requests in 10 seconds</button> 
+        </div>
+        <hr>
+    {% endfor %}
+    <script>
+        function myFunction() {
+            for (let i = 0; i < 10; i++) {
+                document.getElementById('overflow-link').click();
+            }            
+        }
+    </script>    
+</body>
+</html>

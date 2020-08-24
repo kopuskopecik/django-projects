@@ -1,0 +1,25 @@
+{% extends 'ingilizce/base.html' %} 
+{% load static %}
+{% block dil %}<link rel="alternate" hreflang="tr" href="https://www.pythonakademi.com/" />{% endblock %}
+
+<!-- Navbar Start -->
+
+{% block body %}
+
+<div class = "container">
+<div class="row">
+	{% for lesson in lessons   %}
+	
+	<div class = "col-md-6 col-sm-12 col-xs-12">
+		<div class = "basliklar {{lesson.filtre1}} {{lesson.filtre2}}">
+			<a href="{{lesson.get_absolute_url}}">
+				<h4 class = " abc text-center">
+				{{lesson.headline}}
+				</h4>
+			</a>
+		</div>		
+	</div>
+	{%  endfor  %}
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+django
+python-decouple
+django-debug-toolbar
+django-crispy-forms
+reportlab
+django-ckeditor
+beautifulsoup4

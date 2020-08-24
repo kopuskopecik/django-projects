@@ -1,0 +1,48 @@
+{% extends 'base.html' %} 
+
+{% block title %} Python-{{baslik.baslik_adi}} {% endblock %}
+
+{% block metalar %}
+		<meta name="description" content="Python programla diline ait {{baslik.baslik_adi}} ile ilgili konu başlıklarına bu sayfamızdan ulaşabilirsiniz.">
+		<meta name="keywords" content="{{baslik.baslik_adi}} içeriği, Python, Python Dersleri">
+	{% endblock %}
+
+{% block sharethis %}
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d9dd46a171ad100126e2a5a&product=inline-share-buttons' async='async'></script>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'tur:index' %}">{{baslik.get_ana_başlık_display}}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{baslik.baslik_adi}}</li>
+  </ol>
+</nav>
+{% endblock %}
+
+
+
+{% block body %}
+<div class = "row justify-content-md-center">
+	<div class = "col-md-8">
+		<h1 class = "text-center text-info py-0 mb-0">{{baslik.baslik_adi}}</h1>
+		
+		<div class="card-body">
+			<div class="list-group">
+			{% for ders in baslik.dersler_set.all %}
+			    {% if forloop.counter == 1 %}
+					<a href="{{ders.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info">{{ders.headline}} dersine giriş</a>
+				{% else %}
+					<a href="{{ders.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info">{{ders.headline}}</a>
+				{% endif %}
+			{% endfor %}
+			</div>
+		</div>
+		<div class="sharethis-inline-share-buttons mb-1"></div>
+	</div>
+</div>
+
+
+
+{% endblock %}

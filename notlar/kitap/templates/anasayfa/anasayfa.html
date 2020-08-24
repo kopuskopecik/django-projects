@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="card mb-3 text-center">
+  <div class="card-header bg-danger text-white"><h5>ÜRÜN KATEGORİLERİMİZ</h5></div>
+  <div class="card-body">
+    {% for category in object_list%}
+	  <a href = "{{category.get_absolute_url}}" type="button" class="btn btn-success btn-lg btn-block">{{category.name}}</a>
+    {% endfor %} 
+  </div>
+</div>
+
+<div class="card-header bg-danger text-white text-center"><h5>ÜRÜNLERİMİZ</h5></div>
+<div class="card-group">
+{% for urun in urunler%}
+  <div class="card">
+  
+	{% if urun.image %}
+   <a href = "{{urun.get_absolute_url}}"> <img class="card-img-top img-responsive" src="{{urun.image.url}}" alt="{{urun.name}}">
+	{% endif %}</a>
+    <div class="card-body text-center">
+      <h5 class="card-title">{{urun.name}}</h5>
+      <p class="card-text">{{urun.description}}</p>
+    </div>
+    <div class="card-footer text-center">
+      <small class="text-muted">{{urun.price}}</small>
+    </div>
+  
+  </div>
+  {% endfor %} 
+</div>
+
+<div class="card-deck mt-3 text-center">
+{% for konu in genel%}
+
+  <div class="card text-white bg-dark mb-3">
+    <div class="card-header"><a class = "text-white" href = "{{konu.get_absolute_url}}">{{konu.başlık}}</a></div>
+    <div class="card-body">
+      <p class="card-text">{{konu.kısa_içerik|safe}}</p>	 
+    </div>
+  </div>   
+
+{% endfor %} 
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %} 
+{% load static %}
+{% load crispy_forms_tags %}
+
+<title>{% block title %} Hakkımızda-İletişim {% endblock %}</title>
+{% block dil %} <link rel="alternate" hreflang="tr" href="https://www.pythonakademi.com/hakkimizda/iletisim/" /> {% endblock %}
+
+{% block body %}
+
+<div class="container">
+	<div class="row justify-content-md-center justify-content-sm-center justify-content-lg-center">
+		<div class= "col-md-11 col-sm-12">
+		<div class="jumbotron mt-2 bg-light py-2 px-2">
+			<h1 class="display-4 text-center text-danger">Hakkımızda</h1>
+			<p class="lead">
+				PythonAKADEMİ, bir grup Pythonsever arkadaş tarafından oluşturulmuş Python öğreten bir sitedir. 
+			</p>
+			<p class = "lead"> İlk etapta (programlama) hayatımızı oldukça kolaylaştıran Python, modül ve paketleri için Türkçe bir kaynak oluşturmayı amaçlıyoruz. 
+				Şuanda Python'ın bir web framework'u olan Django ile ilgili dokümantasyon oluşturulma aşamasındadır. İlerleyen zamanlarda, kivy, pygame, sphinx gibi paketlerle ile ilgili bilgileri de sitemize yüklemeyi amaçlıyoruz. Çalışmalarımızı, mümkün olduğu kadar resmi dokümanlardan yapmaya çalışıyoruz. Esasında asıl yaptığımız iş, İngilizce orjinal dokümanların sade bir dille Türkçe'ye çevrilmesi ve kodlarla örneklendirilmesidir. Türkçe doküman olarak ise yalnızca, şuan aktif durumda olmayan <b>www.istihza.com</b> sitesinde bir zamanlar yayınlanmış, Fırat Özgül ve arkadaşlarının hazırlamış olduğu Python dokümanından faydalanılmıştır.</p>
+			<p class = "lead">Son olarak sitemizde ne yazık ki her şey mükemmel değil ve elbette hatalarımız olmuştur. Bu yüzden sitemizde görmüş olduğunuz hataları, eksikleri bize bildirmeniz önemle rica olunur. Bunun için aşağıdaki form üzerinden bize ulaşabilirsiniz.</p>
+			<p class = "lead">Sitemizde bulunan tüm konu başlıklarına <a class="btn btn-success btn-sm" href="{% url 'tur:index' %}" role="button">Burdan</a> ulaşabilirsiniz.</p>
+			<p class = "text-center"> <b>07.08.2019</b></p>
+			
+		</div>
+		</div>
+	
+		<div class ="col-md-7">					
+				<form method="POST" class = "hakkimizda">
+					{% csrf_token %}
+					<h1 class ="text-center text-danger">İletişim</h1>
+					{{form|crispy}}
+					{{form.media}}
+					<input class="btn btn-primary" type="submit" value="Gönder">
+				</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

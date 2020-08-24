@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block body %}
+<div class = "container-fluid">
+	<ul class="list-group list-group-horizontal-sm mb-2 mt-2">
+		<a href = "{% url 'profil:ogrenci_profil' ogrenci_id %}" class="list-group-item">Başlıklarım</a>
+		<a href = "{% url 'profil:derslerim' ogrenci_id %}" class="list-group-item">Derslerim</a>
+		<a href = "{% url 'profil:sorular' ogrenci_id %}" class="list-group-item {{active}}">Sorularım</a>
+		<a href = "{% url 'profil:favoriler' ogrenci_id %}" class="list-group-item">Favorilerim</a>
+	</ul>
+	<div class="list-group">
+	  {% for soru in sorular %}
+		<a href="{{soru.get_absolute_url}}" id = "{{soru.id}}" class="list-group-item list-group-item-action list-group-item-danger d-flex justify-content-between align-items-center">{{soru.content}} <span class="badge badge-danger badge-pill">{{soru.cevap_sayisi}} cevap</span></a>
+	  {% endfor %}
+	</div>
+</div>
+
+{% endblock %}

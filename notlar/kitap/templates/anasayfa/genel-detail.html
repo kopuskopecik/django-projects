@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}{{object.başlık}}{% endblock %}
+
+
+
+
+{% block content %}
+
+<div class="card border-info mb-3 text-center">
+  <div class="card-header">{{object.başlık}}</div>
+  <div class="card-body text-info">
+    <p class="card-text">{{object.uzun_içerik|safe}}</p>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block dil %}<link rel="alternate" hreflang="en" href="https://www.pythonakademi.com/en/python/" />{% endblock %}
+
+{% block body %}
+
+<div class = "container">
+<div class="row">
+	{% for lesson in lessons   %}
+
+{% if forloop.counter == 5 %}
+	<div class = "col-md-12 col-sm-12 col-xs-12">
+	<div class = "reklam">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-fb+5w+4e-db+86"
+     data-ad-client="ca-pub-6592386402749117"
+     data-ad-slot="3492194044"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+	</div>
+	
+	</div>
+{%  endif  %}
+
+	
+	{% if forloop.counter == 25 %}
+	<div class = "col-md-12 col-sm-12 col-xs-12">
+	<div class = "reklam">
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-fb+5w+4e-db+86"
+     data-ad-client="ca-pub-6592386402749117"
+     data-ad-slot="3492194044"></ins>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({});
+	</script>
+	</div>
+	
+	</div>
+
+	
+	{%  endif  %}
+	
+	<div class = "col-md-6 col-sm-12 col-xs-12">
+	
+		<div class = "basliklar {{lesson.filtre1}} {{lesson.filtre2}}">
+			<a href="{{lesson.get_absolute_url}}">
+				<h4 class = " abc text-center">
+				{{lesson.headline}}
+				</h4>
+			</a>
+		</div>		
+	</div>
+	{%  endfor  %}
+	
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- Detay sonu -->
+					<ins class="adsbygoogle"
+						style="display:block"
+						data-ad-client="ca-pub-6592386402749117"
+						data-ad-slot="7947100919"
+						data-ad-format="auto"
+						data-full-width-responsive="true"></ins>
+					<script>
+						(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+	
+</div>
+</div>
+{% endblock %}

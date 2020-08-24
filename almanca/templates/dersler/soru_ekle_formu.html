@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'dersler:baslik_listesi' %}">Başlıklar</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'dersler:baslik_guncelle' baslik.pk %}">{{ baslik.title }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Yeni Soru Ekle</li>
+    </ol>
+  </nav>
+  <div class = "container">
+  <div class="row justify-content-center">
+  <div class="col-md-6 col-sm-8 col-12 bg-light">
+			<h4 class="mb-0 text-center text-secondary">{{ders.title}} Dersinize Soru Ekle </h4>
+			<form method="post" novalidate>
+				{% csrf_token %}
+				{{ form|crispy }}				
+				<button type="submit" class="btn btn-success btn-block btn-sm">Kaydet</button>
+			</form>
+		</div>
+		</div>
+  </div>
+{% endblock %}

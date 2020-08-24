@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+  <div class="row justify-content-center mt-3">
+    <div class="col-md-5 col-sm-10 col-12">
+      <h4 class="mb-0 text-center text-secondary ">Kayıt Ol</h4>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-block btn-success">Kayıt Ol</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

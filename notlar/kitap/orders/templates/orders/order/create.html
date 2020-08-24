@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Siparişiniz
+{% endblock %}
+
+{% block content %}
+
+  <div class="row justify-content-center mt-2">
+    <div class="col-lg-8 col-md-10 col-sm-12">	
+      <div class="card mb-2">
+        <div class="card-body">
+          <h3 class="card-title text-center">Sipariş</h3>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {% include 'includes/form2.html' %}
+            <button type="submit" class="btn btn-primary btn-block">Gönder</button>
+          </form>
+        </div>
+      </div>
+	  
+	  	               <ul class="list-group">
+                    {% for item in cart %}
+                        <li class="list-group-item">
+                        {{ item.quantity }}x {{ item.product.name }}
+                        <span>{{ item.total_price }} tl</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+	 </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'profiles:ogrenci_profil' baslik.owner.id %}">Başlıklarım</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ baslik.title }}</li>
+  </ol>
+</nav>
+  <div class = "container-fluid">
+	<div class="row justify-content-center mb-2">
+	    <div class="col-md-6 col-sm-8 col-12 bg-light">
+			<h4 class="mb-0 text-center text-secondary">{{baslik.title}} Başlığını Güncelle</h4>
+			<form method="post" novalidate>
+				{% csrf_token %}
+				{{ form.title|as_crispy_field }}				
+				{{ form.content|as_crispy_field }}
+				<div class="form-row">
+					<div class="form-group col-10 mb-0">
+						{{ form.youtube_urli|as_crispy_field }}
+					</div>
+					<div class="form-group col-2 mb-0">
+						{{ form.ranking|as_crispy_field }}
+					</div>
+				</div>
+    			<button type="submit" class="btn btn-success btn-block btn-sm">Kaydet</button>
+			</form>
+		</div>
+	</div>
+    <div class="card">
+	  <div class="card-header">
+        <div class="row">
+          <div class="col-8">
+            <strong>{{baslik.title}} Başlığına Ait Dersleriniz</strong>
+          </div>
+		  <div class="col-2">
+            <strong>Sil?</strong>
+          </div>
+          <div class="col-2">
+            <strong>Sıra</strong>
+          </div>
+        </div>
+      </div>
+      <div class="list-group list-group-flush list-group-formset">
+        {% for ders in lessons %}
+	      <div class="list-group-item">
+            <div class="row">
+              <div class="col-8">
+                <a href="{% url 'lessons:ders_guncelle' baslik.pk ders.pk %}">{{ ders.title }}</a>
+			  </div>
+			  <div class="col-2">
+                <a class = "text-danger" href="{{ders.sil}}"><i class= "fas fa-trash-alt"></i></a>
+              </div>
+              <div class="col-2">
+                {{ ders.ranking }}
+              </div>
+            </div>
+          </div>
+        {% empty %}
+          <div class="list-group-item text-center">
+            <p class="text-muted font-italic mb-0">Henüz bir ders yok! <a href="{% url 'lessons:ders_ekle' baslik.pk %}">İlk dersinizi ekleyin</a>.</p>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="card-footer">
+        <a href="{% url 'lessons:ders_ekle' baslik.pk %}" class="btn btn-primary btn-sm">Ders ekle</a>
+		{% if baslik.ders_var_mi %}
+		    <a class = "btn btn-sm btn-warning" href="{% url 'lessons:ders_degistir' baslik.pk baslik.ders_set.first.pk %}">Dersleri Gör</a>
+	    {% endif %}
+	  </div>
+    </div>
+  </div>
+{% endblock %}

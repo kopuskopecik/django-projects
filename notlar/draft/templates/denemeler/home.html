@@ -1,0 +1,85 @@
+
+
+{% if messages %}
+<p>{{messages}}</p>
+<ul class="messages">
+{% for message in messages %}
+
+<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} {{DEFAULT_MESSAGE_LEVELS}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<h2><a href = "{% url 'denemeler:create' %}"> Article Create Formunu açar. </a></h2>{{now}}
+{% load flatpages %}
+
+{% load humanize %}
+
+<h4>humanize filtreleri</h4>
+
+<h5>apnumber</h5>
+<p>{{sayı1|apnumber}}</p>
+
+<h5>intcomma</h5>
+<p>{{sayı2|intcomma}}</p>
+
+<h5>intword</h5>
+<p>{{sayı3|intword}}</p>
+
+<h5>naturalday</h5>
+<p>{{now|naturalday}}</p>
+
+<h5>naturaltime</h5>
+<p>{{now|naturaltime}}</p>
+
+<h5>ordinal</h5>
+<p>{{sayı1|ordinal}}</p>
+
+
+<h4>Flatpages</h4>
+
+{% get_flatpages as flatpages %}
+<ul>
+{% for page in flatpages %}
+<li><a href="{{ page.url }}">{{ page.title }}</a></li>
+{% endfor %}
+</ul>
+
+{% get_flatpages '/about/' as flatpages %}
+<ul>
+{% for page in flatpages %}
+<li><a href="{{ page.url }}">{{ page.title }}</a></li>
+{% endfor %}
+</ul>
+
+
+
+{% for article in articles %}
+<p>
+	<a href = "{{article.get_absolute_url}}"> {{article.name}}</a>
+	<small>{{article.publishing_date}}</small> 
+	<a href = "{% url 'denemeler:update' article.slug%}">Güncelle</a>
+	<a href = "{% url 'denemeler:delete' article.slug%}">Sil?</a>
+	<a href = "{% url 'denemeler:article_archive' %}">Arşiv</a>
+	<a href = "{% url 'denemeler:article_year_archive' article.publishing_date.year%}">Yıllık</a>
+	<a href = "{% url 'denemeler:archive_month_numeric' article.publishing_date.year article.publishing_date.month%}">Aylık</a>
+	<a href = "{% url 'denemeler:archive_today' %}">Bugün</a>
+	
+
+</p>
+<hr>
+{% endfor %}
+
+
+
+
+
+<h1>Articles</h1>
+<ul>
+{% for article in object_list %}
+<li>{{ article.name }} </li>
+{% empty %}
+<li>No articles yet.</li>
+{% endfor %}
+</ul>
+

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class = "container-fluid">
+  <div class="progress mb-3 mt-2">
+    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ progress }}%"></div>
+  </div>
+   <p class="lead">{{ question.content }}</p>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form|crispy }}
+    <!-- Modal -->
+<div class="modal fade" id = "yanlisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-danger" id="exampleModalLabel">YANLIŞ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body text-success">
+        <b>Doğru cevap:</b> {{dogru_cevap.content}}
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-success">Devam →</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id = "dogruModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-success text-bold" id="exampleModalLabel">DOĞRU</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-block btn-success">Devam →</button>
+      </div>
+    </div>
+  </div>
+</div>
+  </form>
+  
+<p id = "dogru-cevap" class = "">{{dogru_cevap.id}}</p>
+
+</div>
+{% endblock %}
+{% block javascript %}
+	<script src="{% static 'js/lessons/baslik_quiz_formu.js' %}"></script>
+{% endblock %}

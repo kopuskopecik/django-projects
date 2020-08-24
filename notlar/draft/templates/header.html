@@ -1,0 +1,94 @@
+<!-- Navbar Start -->
+<nav class="navbar navbar-default navbar-fixed-top" role="banner">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+
+            <!-- Telefon ekranları için menü butonu -->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- İsim Soyisim veya Marka İsmi -->
+            <a href="{% url 'home' %}" class="navbar-brand">
+				<i class="fab fa-python"></i>
+				<b>PythonAKADEMİ</b>
+				<i class="fab fa-python"></i>
+			</a>
+			
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+
+            <!-- Arama Çubuğu -->
+            <form class="navbar-form navbar-left" role="search" method="GET" action="">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="q" placeholder="Arama" value="{{request.GET.q}}" >
+                    <span class="input-group-btn">
+                        <input class="btn btn-default" type="submit" value="Ara">
+                    </span>
+                </div>
+            </form> 
+
+            <!-- Temel Sayfalar -->
+            <ul class="nav navbar-nav navbar-right">
+			
+				<li>
+					{% block deneme %}<a href="{% url 'ingilizce:index' %}"><b>EN</b></a>{% endblock %}
+				</li>
+			
+			
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<b>Genel</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% for konu in genel1   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+						
+						<li role="separator" class="divider"></li>
+						{% for konu in genel2   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+						<li role="separator" class="divider"></li>
+						<li><a href="{% url 'tur:index' %}"><b>Tüm İçerik</b></a></li>
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<b>Modüller</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% for konu in moduller   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<b>Paketler</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% for konu in paketler1   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+						<li role="separator" class="divider"></li>
+						{% for konu in paketler2   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+					</ul>
+				</li>
+				
+			<!--	<li><a href="{% url 'hakkimizda:hak' %}"><b>Hakkımızda</b></a></li> -->
+				{% if request.user.is_authenticated %}
+					<li><a href="{% url 'tur:create' %}"><b>++</b></a></li>
+				{% endif %}
+			</ul>
+
+        </nav>
+
+    </div>
+</nav>

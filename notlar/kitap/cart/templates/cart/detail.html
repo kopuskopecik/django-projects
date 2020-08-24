@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Sepetiniz
+{% endblock %}
+
+{% block content %}
+
+{% with totail_items=cart|length %}
+  <h2 class = "table-bordered bg-dark text-white text-center mb-0 mt-3">
+  {% if cart|length > 0 %}
+	Sepetiniz
+  {% else %}
+    Sepetiniz boş!
+  {% endif %}
+{% endwith %}
+  </h2>
+<table class="table table-hover table-bordered table-dark table-responsive-sm">
+  <thead>
+    <tr>
+      <th scope="col">Resim</th>
+      <th scope="col">Ürün</th>
+      <th scope="col">Miktar</th>
+      <th scope="col">Sil</th>
+	  <th scope="col">Birim Fiyat</th>
+	  <th scope="col">Toplam Fiyat</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in cart %}
+  {% with product=item.product  %}
+  <tr>
+    <td>
+      <a href="{{ product.get_absolute_url }}">
+	    <img src="{% if product.image %} {{ product.image.url }} {% else %} {% static 'img/default.jpg' %}  {% endif %}" style="height: 130px; width: auto">
+	  </a>
+    </td>
+    <td>{{ product.name }}</td>
+    <td>
+      <form action="{% url 'cart:cart_add' product.id %}" method="post">
+        {% csrf_token %}
+        {{ item.update_quantity_form.quantity }}
+        {{ item.update_quantity_form.update }}
+        <input type="submit" value="Güncelle" class="btn btn-info btn-sm py-1">
+      </form>
+    </td>
+    <td>
+      <a class = "btn btn-danger btn-sm" href="{% url 'cart:cart_remove' product.id %}">Kaldır</a>
+    </td>
+    <td>{{ item.price }} tl</td>
+    <td>{{ item.total_price }} tl</td>
+  </tr>
+{% endwith %}
+{% endfor %}
+  <tr class = "bg-success">
+    <td><b>Toplam</b></td>
+    <td colspan="4"></td>
+    <td colspan="num"><b>{{ cart.get_total_price }} tl</b></td>
+  </tr>
+  </tbody>
+</table>
+<div class="text-right">
+  <a href="{% url 'shop:product_list' %}" class="btn btn-info">Alışverişe Devam</a>
+  <a href="{% url 'orders:order_create' %}" class="btn btn-success">Tamamla</a>
+</div>
+{% endblock %}

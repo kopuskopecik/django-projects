@@ -1,0 +1,21 @@
+{% extends 'ingilizce/base.html' %} 
+{% load static %}
+
+{% block dil %}<link rel="alternate" hreflang="en" href="https://www.pythonakademi.com/en/python/" />{% endblock %}
+
+
+
+{% block body %}
+<div class = "container">
+	<div class = "row mt-5">
+		<div class = "col-md-4 mb-4">
+			<a href = "{% url 'ingilizce:index' %}" role= "button" class="btn btn-outline-dark btn-block ana-sayfa-ders-linkleri"><i class="fab fa-python"></i> Python Lessons</a>
+		</div>
+	  {% for baslik in basliklar %}	
+		<div class = "col-md-4 mb-4">
+			<a href = "{{baslik.get_absolute_url}}"role= "button" class="btn btn-outline-dark btn-block ana-sayfa-ders-linkleri"><i class="{{baslik.icon_name}}"></i> {{baslik.baslik_adi}}</a>
+		</div>
+	  {% endfor %}	
+	</div>
+</div>
+{% endblock %}

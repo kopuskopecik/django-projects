@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags crispy_forms_filters %}
+
+{% block body %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'profil:ogrenci_profil' baslik.owner.id %}">Başlıklarım</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'dersler:baslik_guncelle' baslik.pk %}">{{ baslik.title }}</a></li>
+    <li class="breadcrumb-item active" aria-current="page">{{ baslik.title }}</li>
+  </ol>
+</nav>
+<div class = "container-fluid">
+  <div class="row justify-content-center mb-2">
+	<div class="col-md-12 col-sm-12 col-12 bg-light">
+      <h4 class="mb-0 text-center text-secondary">{{baslik.title}} Başlığın ve Dersler</h4>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        {{ formset.management_form }}
+        {{ form.title|as_crispy_field }}				
+	    {{ form.content|as_crispy_field }}
+	    <div class="form-row">
+	      <div class="form-group col-10 mb-0">
+	       {{ form.youtube_urli|as_crispy_field }}
+	      </div>
+	      <div class="form-group col-2 mb-0">
+	       {{ form.ranking|as_crispy_field }}
+	      </div>
+	   </div>
+       <div class="card mb-3{% if formset.errors %} border-danger{% endif %}">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-3">
+            <strong>Dersler</strong>
+          </div>
+          <div class="col-6">
+            <strong>İçerik</strong>
+          </div>
+          <div class="col-2">
+            <strong>Sıralama</strong>
+          </div>
+		  <div class="col-1">
+            <strong>Sil</strong>
+          </div>
+		  
+		  </div>
+      </div>
+      {% for error in formset.non_form_errors %}
+        <div class="card-body bg-danger border-danger text-white py-2">{{ error }}</div>
+      {% endfor %}
+      <div class="list-group list-group-flush list-group-formset">
+        {% for form in formset %}
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-3">
+                {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                {{ form.title|as_crispy_field }}
+                {% if form.instance.pk and form.title.value != form.instance.title %}<p class="mb-0 mt-1"><small class="text-muted font-italic"><strong>Old answer:</strong> {{ form.instance.title }}</small></p>{% endif %}
+              </div>
+              <div class="col-6">
+                {{ form.content|as_crispy_field  }}
+				{{ form.media }}
+              </div>
+              <div class="col-2">
+                {{ form.ranking|as_crispy_field  }}
+              </div>
+			  <div class="col-1">
+                {% if form.instance.pk %}
+				  {{ form.DELETE|as_crispy_field  }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <p>
+      <small class="form-text text-muted">En az <strong>1</strong> ve maksimum <strong>10</strong>ders ekleyebilirsiniz. </small>
+    </p>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a href="{% url 'dersler:baslik_guncelle' baslik.pk %}" class="btn btn-outline-secondary" role="button">Vazgeç</a>
+    <a href="{% url 'dersler:baslik_sil' baslik.pk %}" class="btn btn-danger float-right">Sil</a>
+  </form>
+  </div>
+  </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% for ders in dersler %}
+<a href = "{{ders.get_absolute_url}}"> {{ders.headline}}</a>
+<hr>
+{% endfor %}

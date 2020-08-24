@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Ürünler {% endblock %}
+
+{% block content %}
+<div class="card-header text-center text-white bg-success mt-2">
+    <h4>MAĞAZAMIZ</h4>
+  </div>
+  
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item">
+        <a class="nav-link active" href="{% url 'shop:product_list'%}">Hepsi</a>
+      </li>
+      <li class="nav-item dropdown ml-2">
+		<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Kategoriler</a>
+		<div class="dropdown-menu">
+		{% for category in categories%}
+		<a class="dropdown-item" href="{{ category.get_absolute_url }}">{{category.name}}</a>
+		{% endfor %}
+		</div>
+	  </li>   
+    </ul>
+  </div>
+</div> 
+ 
+<div class="card-group">
+{% for product in products %}
+  <div class="card text-center mt-2 mb-2">
+  
+    <a href = "{{product.get_absolute_url }}"><img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}"></a>
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <p class="card-text">{{product.content}}</p>
+    </div>
+  
+  <div class="card-footer">
+      <small class="text-muted">{{product.price}} tl</small>
+  </div>
+  </div>
+  
+  {% if forloop.counter|divisibleby:5 %}
+  <div class="w-100"></div>
+  {% endif %}
+  {% endfor %}
+</div>
+{% endblock %}

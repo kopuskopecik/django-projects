@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="tr">
+<head>
+	<title>{% block title %} Almanca Dersleri{% endblock %}</title>
+	{% block dil %}{% endblock %}	
+	
+	<!-- Metalar -->
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">	
+		
+	{% block metalar %}
+		<meta name="description" content="Almanca Gramer Dersleri">
+		<meta name="keywords" content="Almanca">
+	{% endblock %}	
+	<meta name="author" content="Sahintürk">
+	{% block icon %}
+	<link rel="shortcut icon" href="#" />
+	{% endblock %}
+	<link rel="stylesheet" href="{% static 'css/all.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-4.3.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/stil.css' %}">
+	<link rel="stylesheet" href="{% static 'css/default.min.css' %}">	
+	{% block sharethis %}{% endblock %}
+</head>
+<!-- body başlangıcı -->
+<body>
+  <div class = "content">
+	{% include 'navbar.html' %}
+	
+	{% if messages %}
+	{% for message in messages %}
+		<div class="alert {{ message.tags }} alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+		</button>
+    {{ message }}
+  </div>
+{% endfor %}
+	
+	{%endif %}
+	
+	{% block body %}
+	
+	{% endblock %}
+  </div>	
+	{% include 'footer.html' %}
+	
+	<script src="{% static 'js/jquery9.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap-4.3.min.js' %}"></script>	
+	<script src="{% static 'js/highlight.min.js' %}"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	{% block javascript%}{% endblock %}
+</body>
+</html>

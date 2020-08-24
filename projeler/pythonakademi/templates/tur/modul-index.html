@@ -1,0 +1,52 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block sharethis %}
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d9dd46a171ad100126e2a5a&product=inline-share-buttons' async='async'></script>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="{% url 'home' %}">Anasayfa</a></li>
+	<li class="breadcrumb-item active" aria-current="page">Python Modul ve Paketleri</li>
+  </ol>
+</nav>
+{% endblock %}
+
+{% block body %}
+
+<div class="container">
+<div class = "row justify-content-md-center">
+<div class = "col-md-9">
+	<h1 class = "text-center text-info py-0 mb-0">Python Modul ve Paketleri</h1>
+	
+	<div class="accordion mt-3" id="accordionExample">
+	  {% for baslik in basliklar %}
+		<div class="card">
+			<div class="card-header index-arka-plan" id="heading{{baslik.id}}">
+				<h2 class="mb-0">
+				<button class="btn btn-link text-dark" type="button" data-toggle="collapse" data-target="#ders-{{baslik.id}}" aria-expanded="true" aria-controls="collapse{{baslik.id}}">
+					{{baslik.baslik_adi}}
+				</button>
+				</h2>
+			</div>
+
+			<div id="ders-{{baslik.id}}" class="collapse" aria-labelledby="{{baslik.baslik_adi}}" data-parent="#accordionExample">
+				<div class="card-body">
+					<div class="list-group">
+					  {% for ders in baslik.dersler_set.all %}
+						<a href="{{ders.get_absolute_url}}#disqus_thread" class="list-group-item list-group-item-action list-group-item-success">{{ders.headline}}</a>
+  					  {% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	  {% endfor %}
+	</div>
+	<div class="sharethis-inline-share-buttons mb-1"></div>
+</div>		
+</div>		
+</div>
+{% endblock %}

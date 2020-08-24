@@ -1,0 +1,193 @@
+.navbar {
+	margin-bottom:0;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+
+
+body {
+	background-color: #faebd7;
+	padding-top:60px;
+	font-family: 'Roboto', 'Arial';
+	color: #101010;
+	font-size: 16px;
+}
+
+.navbar-brand {
+    color: #fcf8e3;
+	font-family: 'Lobster', cursive;
+	font-size:22px;
+	border:none;
+}
+
+
+h4, .detailbaslik {
+	font-family: 'Roboto', 'Arial';
+	color: #dc0606;
+}
+
+
+.index:hover {
+	color:mediumseagreen;
+}
+
+.fa-python {
+  color: #9B2335;
+}
+
+.basliklar {
+	margin-top: 20px;
+	background-color: #9B2335;
+	color: white;
+	padding: 10px;
+	border-radius: 20px;
+}
+
+.col-lg-2,.col-md-2, .col-sm-3{
+	padding-left: 8px;
+} 
+
+
+.detailmenu {
+	background-color: #9B2335;
+	overflow-y: auto;
+}
+
+.row{
+    overflow: hidden; 
+}
+
+[class*="col-"]{
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.abc {
+	margin-bottom: 10px;
+	color:#fff;
+}
+
+.index {
+	text-decoration: none;
+	color: #101010;
+	margin-top: 10px;
+}
+
+.content {
+	padding-right: 0;
+    padding-left: 0;
+}
+hr{
+	border-top: 1px solid #e69db6;
+	margin-top: 10px;
+    margin-bottom: 10px;
+}
+tt {
+	color:#010115;
+}
+
+code {
+	font-size: 14px;
+	color: #f53e0b;
+	padding: 0 0;
+	font-weight: 500;
+	background-color: #101010;
+}
+
+.language-python {
+	font-size: 14px;
+}
+
+blockquote {
+	border-left-color: #101010;
+    padding: 10px 10px;
+    margin: 10px 30px;
+	background-color: #1e6f57;
+	color: #fff;
+}
+h3 {
+	margin-top: 10px;
+}
+.codes {
+	background-color: #101010;
+	border: 1px solid #cccccc;
+    padding: 5px 10px;
+	margin-bottom: 8px;
+	margin-top: 8px;
+}
+
+
+tt {
+	color:#fff;
+}
+
+
+.thumbnail {
+	margin-bottom: 10px;
+	word-wrap: break-word;
+}
+
+.baslik {
+	word-wrap: break-word;
+	color: #fff;
+}
+
+
+.tik{
+	color: #e4e81c;
+} 
+
+th {
+    text-align: middle;
+}
+
+.oklar {
+	
+	color: #fff;
+	margin-bottom: -4px;
+
+}
+
+.ikinci {
+	float: right;
+}
+
+@media (max-width: 767px) {
+
+.detailmenu{
+	display:none;
+}
+
+
+}
+
+@media (min-width: 767px) {
+
+.solmenu{
+	display: none;
+}
+
+
+}
+
+.badge {
+	background-color: darkgreen;
+}
+
+.hakkimizda {
+	width: 75%;
+	margin: 0 auto;
+}
+
+table {
+	table-layout: fixed;
+	width: auto;
+}
+
+.navbar-height {
+	100px;
+}

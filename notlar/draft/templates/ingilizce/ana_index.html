@@ -1,0 +1,25 @@
+{% extends 'ingilizce/base.html' %} 
+{% load static %}
+{% block body %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class = "index">
+		
+		{% for lesson in lessons   %}
+		
+			<div class = "col col-md-6 col-sm-6 col-xs-12">
+				<ul class="list-group">
+					<a class ="index" href="{{lesson.get_absolute_url}}"><li class="list-group-item">
+						<span class="badge">{{lesson.number}}</span>
+					{{lesson.headline}}
+					</li></a>
+				</ul>
+			</div>
+		{%  endfor  %}
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}

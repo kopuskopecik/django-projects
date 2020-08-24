@@ -1,0 +1,39 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <a class="navbar-brand" href="{% url 'ingilizce:ing-home' %}">
+  <i class="fab fa-python"></i>
+	PythonAkademi
+  <i class="fab fa-python"></i>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ingilizce:index' %}">Python Lessons<span class="sr-only">(current)</span></a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ingilizce:tkinter-index' %}">Tkinter Lessons</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ingilizce:modul-index' %}">Modules and Packages</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ingilizce:ara' %}">Search</a>
+      </li>
+	  {% if user.is_superuser %}
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ingilizce:create' %}">Add Lesson</a>
+      </li>
+	  {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<!-- Alt navbar -->
+<nav class="navbar navbar-dark nav-alti py-0">
+  <span class="navbar-text text-white">
+    More than 500 topics and 1000 examples about Python, its modules and packages...
+  </span>
+</nav>

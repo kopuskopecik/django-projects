@@ -1,0 +1,156 @@
+{% load private_tag %}
+{% load static %}
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+
+<!DOCTYPE html><html class=''>
+<head>
+  <meta charset='UTF-8'><meta name="robots" content="noindex"><link rel="shortcut icon" type="image/x-icon" href="//production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico" /><link rel="mask-icon" type="" href="//production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111" /><link rel="canonical" href="https://codepen.io/emilcarlsson/pen/ZOQZaV?limit=all&page=74&q=contact+" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,300' rel='stylesheet' type='text/css'>
+
+<script src="https://use.typekit.net/hoy3lrg.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css'><link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css'>
+<link class="cp-pen-styles" rel = "stylesheet" href = "{% static 'css/style.css' %}">
+
+</head><body>
+
+<div id="frame">
+	<div id="sidepanel">
+		<div id="profile">
+			<div class="wrap">
+				<img id="profile-img" src="{{me.avatarUrl}}" class="online" alt="{{me.name}}" />
+				<p>{{me.name}}</p>
+				<i class="fa fa-chevron-down expand-button" aria-hidden="true"></i>
+				<div id="expanded">
+					<label for="twitter"><i class="fa fa-facebook fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="mikeross" />
+					<label for="twitter"><i class="fa fa-twitter fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="ross81" />
+					<label for="twitter"><i class="fa fa-instagram fa-fw" aria-hidden="true"></i></label>
+					<input name="twitter" type="text" value="mike.ross" />
+				</div>
+			</div>
+		</div>
+		<div id="search">
+			<label for=""><i class="fa fa-search" aria-hidden="true"></i></label>
+			<input type="text" placeholder="Search contacts..." />
+		</div>
+		<div id="contacts">
+            <h4 class = "mt-1">Channels</h4>
+			<ul>                
+              {% for channel in channel_list %}                
+				<li class="contact">
+					<div class="wrap">
+						<!-- <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" /> -->
+						<div class="meta" >
+
+							<p class="name isim" id = "{{channel.name}}">{{channel.name}}</p>
+							<p class="preview">{{channel.lastMessage.msg}}</p>
+						</div>
+					</div>
+                </li>
+              {% endfor %}
+      </ul>
+      <h4 class = "mt-1">Direct Messages</h4>
+      <ul>                                
+              {% for message in messages_list %}                
+				<li class="contact">
+					<div class="wrap">
+						<!-- <img src="http://emilcarlsson.se/assets/louislitt.png" alt="" /> -->
+						<div class="meta" >
+
+							<p class="name isim" id = "{{message.usernames.1}}">{{message.usernames.1}}</p>
+							<p class="preview">{{message.lastMessage.msg}}</p>
+						</div>
+					</div>
+                </li>
+              {% endfor %}
+      </ul>             
+
+		</div>
+		<div id="bottom-bar">
+			<button id="addcontact"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> <span>Add contact</span></button>
+			<button id="settings"><i class="fa fa-cog fa-fw" aria-hidden="true"></i> <span>Settings</span></button>
+		</div>
+    </div>
+    {% for channel in channels %}  
+	<div class="content abc" id= "{{channel.0}}-1">
+		<div class="contact-profile">
+			<p class = "ml-2">{{channel.0}}</p>
+			<div class="social-media">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+				 <i class="fa fa-instagram" aria-hidden="true"></i>
+			</div>
+        </div>
+        
+		<div class="messages">
+			<ul>
+                {% for message in channel.1 %}
+				<li class="{% if message.u.username == me.username %}sent{% else%}replies{%endif%}">
+					<img src="{% if message.u.username == me.username %}http://emilcarlsson.se/assets/mikeross.png{% else%}http://emilcarlsson.se/assets/harveyspecter.png{%endif%}" alt="" />
+					<p>{{message.msg}}</p>
+				</li>
+
+                {% endfor %}
+			</ul>
+		</div>
+		<div class="message-input">
+			<div class="wrap">
+        <form>
+			    <input name = "message" type="text" placeholder="Write your message..." />
+          <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+          <input type="hidden" value="{{channel.0}}" name="channel" />
+          <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+			</div>
+		</div>
+    </div>
+    {% endfor %}
+
+    {% for content in message_contents %}  
+	<div class="content abc" id= "{{content.0}}-1">
+		<div class="contact-profile">
+			<p class = "ml-2">{{content.0}}</p>
+			<div class="social-media">
+				<i class="fa fa-facebook" aria-hidden="true"></i>
+				<i class="fa fa-twitter" aria-hidden="true"></i>
+				 <i class="fa fa-instagram" aria-hidden="true"></i>
+			</div>
+        </div>
+        
+		<div class="messages">
+			<ul>
+                {% for message in content.1 %}
+				<li class="{% if message.u.username == me.username %}sent{% else%}replies{%endif%}">
+					<img src="{% if message.u.username == me.username %}http://emilcarlsson.se/assets/mikeross.png{% else%}http://emilcarlsson.se/assets/harveyspecter.png{%endif%}" alt="" />
+					<p>{{message.msg}}</p>
+				</li>
+                {% endfor %}
+			</ul>
+		</div>
+		<div class="message-input">
+			<div class="wrap">
+        <form>
+			    <input name = "direct" type="text" placeholder="Write your message..." />
+          <i class="fa fa-paperclip attachment" aria-hidden="true"></i>
+          <input type="hidden" value="{{content.0}}" name="username" />
+          <button class="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+        </form>
+			</div>
+		</div>
+    </div>
+    {% endfor %}
+
+</div>
+<script src = "{% static 'js/my.js' %}"></script>
+</body></html>

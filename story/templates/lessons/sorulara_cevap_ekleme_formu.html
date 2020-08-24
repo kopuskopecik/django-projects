@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags crispy_forms_filters %}
+
+{% block body %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="{% url 'lessons:baslik_listesi' %}">Başlıklar</a></li>
+      <li class="breadcrumb-item"><a href="{% url 'lessons:baslik_detail' baslik.pk %}">{{ baslik.title }}</a></li>
+	  <li class="breadcrumb-item"><a href="{% url 'lessons:ders_guncelle' baslik.pk ders.pk%}">{{ ders.title }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ soru.content }}</li>
+    </ol>
+  </nav>
+  <div class = "container">
+  <h4 class="mb-0 text-center text-secondary">{{soru.content}} sorusuna cevap ekle</h4>
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ formset.management_form }}
+    {{ form|crispy }}
+    <div class="card mb-3{% if formset.errors %} border-danger{% endif %}">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-9">
+            <strong>Cevaplar</strong>
+          </div>
+           <div class="col-2">
+            <strong>Doğru Cevap</strong>
+          </div>
+		  <div class="col-1">
+            <strong>Sil</strong>
+          </div>
+		  
+		  </div>
+      </div>
+      {% for error in formset.non_form_errors %}
+        <div class="card-body bg-danger border-danger text-white py-2">{{ error }}</div>
+      {% endfor %}
+      <div class="list-group list-group-flush list-group-formset">
+        {% for form in formset %}
+          <div class="list-group-item">
+            <div class="row">
+              <div class="col-9">
+                {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                {{ form.content|as_crispy_field }}
+			   {% if form.instance.pk and form.content.value != form.instance.content %}<p class="mb-0 mt-1"><small class="text-muted font-italic"><strong>Old answer:</strong> {{ form.instance.content }}</small></p>{% endif %}
+              </div>
+               <div class="col-2">
+                {{ form.dogru_cevap|as_crispy_field }}
+              </div>
+			  <div class="col-1">
+                {% if form.instance.pk %}
+                  {{ form.DELETE|as_crispy_field }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <p>
+      <small class="form-text text-muted">En az <strong>2</strong> ve maksimum <strong>10</strong>soru ekleyebilirsiniz. </small>
+    </p>
+    <button type="submit" class="btn btn-success">Kaydet</button>
+    <a href="{% url 'lessons:ders_guncelle' baslik.pk ders.pk%}" class="btn btn-outline-secondary" role="button">Vazgeç</a>
+    <a href="{{soru.sil}}" class="btn btn-danger float-right">Sil</a>
+  </form>
+  </div>
+{% endblock %}
+{% block javascript%}
+<script>
+$(document).ready(function(){
+	$(".col-form-label").hide();
+
+});
+</script>
+{% endblock %}

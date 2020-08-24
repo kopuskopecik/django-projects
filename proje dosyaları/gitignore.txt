@@ -1,0 +1,13 @@
+*.pyc
+*~
+__pycache__/
+
+.env
+myvenv
+db.sqlite3
+.DS_Store
+
+
+staticfiles/
+
+lokal.py

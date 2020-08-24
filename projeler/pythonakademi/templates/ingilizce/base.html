@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>{% block title %} PythonAkademi-Python Dersleri{% endblock %}</title>
+	{% block dil %}{% endblock %}	
+	<!-- Search Engine Metaları -->
+	<meta name="google-site-verification" content="PUTrQmtpisnLh5wjd968M4sXwMhVt607eWm27qMwwy4" />
+	<meta name="yandex-verification" content="639128d9f1e0039d" />
+	<meta name="msvalidate.01" content="B7F4DB5F545AA0F7B2A566D9C322E1DE" />
+
+	<!-- Google Adsense -->
+	<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+	<script>
+		(adsbygoogle = window.adsbygoogle || []).push({google_ad_client: "ca-pub-6592386402749117",
+			enable_page_level_ads: true});
+	</script>
+	<script data-ad-client="ca-pub-6592386402749117" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+
+	<!-- Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136410275-1"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-136410275-1');
+	</script>
+
+	<!-- Metalar -->
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">	
+		
+	{% block metalar %}
+		<meta name="description" content="More than 500 topics and 1000 examples about Python, its modules and packages">
+		<meta name="keywords" content="Python, Python Lessons, Python Examples, Python Modules and Packets, re, os, sys, 
+	sqlite3, math, random, datetime, time, calendar, tkinter, pmw, django">
+	{% endblock %}	
+	<meta name="author" content="Pythonakademi">
+	{% block icon %}
+	<link rel="shortcut icon" href="{% static 'img/python.ico'%}" />
+	{% endblock %}
+	<link rel="stylesheet" href="{% static 'css/all.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-4.3.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/stil.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/default.min.css' %}">	
+	{% block sharethis %}{% endblock %}
+</head>
+<!-- body başlangıcı -->
+<body>
+  <div class = "content">
+	{% include 'ingilizce/navbar.html' %}
+	
+	{% block breadcrumb %}
+	
+	{% endblock %}
+	
+	{% include 'message.html' %}
+	
+	{% block body %}
+	
+	{% endblock %}
+  </div>	
+	{% include 'ingilizce/footer.html' %}
+	
+	<script src="{% static 'js/jquery9.min.js' %}"></script>
+	<script src="{% static 'js/popper.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap-4.3.min.js' %}"></script>	
+	<script src="{% static 'js/highlight.min.js' %}"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+	{% block javascript%}{% endblock %}
+</body>
+</html>

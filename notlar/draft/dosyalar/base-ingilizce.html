@@ -1,0 +1,153 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<title>{% block title %} PythonAkademi-Python Lessons {% endblock %}</title>
+{% block dil %}{% endblock %}	
+
+<meta name="google-site-verification" content="PUTrQmtpisnLh5wjd968M4sXwMhVt607eWm27qMwwy4" />
+<meta name="yandex-verification" content="639128d9f1e0039d" />
+<meta name="msvalidate.01" content="B7F4DB5F545AA0F7B2A566D9C322E1DE" />
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-6592386402749117",
+    enable_page_level_ads: true
+  });
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-136410275-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-136410275-1');
+</script>
+
+<!-- Metalar -->
+	<meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">	
+	
+	
+	{% block metalar %}
+	<meta name="description" content="More than 500 topics and 1000 examples about Python, its modules and packets">
+	<meta name="keywords" content="Python, Python Lessons, Python Examples, Python Modules and Packets, re, os, sys, 
+	sqlite3, math, random, datetime, time, calendar, tkinter, pmw, django">
+	{% endblock %}	
+	<meta name="author" content="Pythonakademi">
+	<!--<link rel="shortcut icon" href="{% static 'img/python.ico'%}" /> -->
+	<link rel="stylesheet" href="{% static 'css/all.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap2.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/ingilizce/style1.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+	<script src="{% static 'js/jquery.min.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/default.min.css' %}">
+	<script src="{% static 'js/highlight.min.js' %}"></script>
+	
+</head>
+<body>
+	<nav class="navbar navbar-default navbar-fixed-top" role="banner">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+
+            <!-- Telefon ekranları için menü butonu -->
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <!-- İsim Soyisim veya Marka İsmi -->
+            <a href="{% url 'ingilizce:index' %}" class="navbar-brand">
+				<i class="fab fa-python"></i>
+				<b>PythonAKADEMI</b>
+				<i class="fab fa-python"></i>
+			</a>
+			
+        </div>
+
+        <nav class="collapse navbar-collapse" role="navigation">
+
+            <!-- Arama Çubuğu -->
+            <form class="navbar-form navbar-left" role="search" method="GET" action="{% url 'ingilizce:all_index' %}">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="q" placeholder="Search" value="{{request.GET.q}}" >
+                    <span class="input-group-btn">
+                        <input class="btn btn-default" type="submit" value="OK">
+                    </span>
+                </div>
+            </form>  
+
+            <!-- Temel Sayfalar -->
+            <ul class="nav navbar-nav navbar-right">
+			
+				<li>
+					{% block language %}<a href="{% url 'home' %}"><b>TR</b></a> {% endblock %}
+				</li>
+			
+			
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<b>Main</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% for konu in genel1   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+						
+						<li role="separator" class="divider"></li>
+						{% for konu in genel2   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+						<li role="separator" class="divider"></li>
+						<li><a href="{% url 'ingilizce:index' %}"><b>All Contents</b></a></li>
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<b>Modules</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% for konu in moduller   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+					</ul>
+				</li>
+				
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+					<b>Packages</b> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						{% for konu in paketler1   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+						<li role="separator" class="divider"></li>
+						{% for konu in paketler2   %}
+						<li><a href="{{konu.get_absolute_url}}"><b>{{konu.headline}}</b></a></li>
+						{%  endfor  %}
+					</ul>
+				</li>
+				
+				<!--<li><a href="{% url 'ingilizce:about' %}"><b>About</b></a></li> -->
+				{% if request.user.is_authenticated %}
+					<li><a href="{% url 'ingilizce:create' %}"><b>Add</b></a></li>
+				{% endif %}
+			</ul>
+
+        </nav>
+
+    </div>
+</nav>
+	{% include 'message.html' %}
+	{% block body %}
+	
+	{% endblock %}
+	
+
+	<script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <a class="navbar-brand" href="{% url 'home' %}">
+  <i class="fab fa-python"></i>
+	PythonAkademi
+  <i class="fab fa-python"></i>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tur:index' %}">Python Dersleri<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tur:django-index' %}">Django Dersleri</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tur:tkinter-index' %}">Tkinter Dersleri</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tur:modul-index' %}">Modül ve Paketler</a>
+      </li>
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tur:ara' %}">Ara</a>
+      </li>
+	  {% if user.is_superuser %}
+	  <li class="nav-item active">
+        <a class="nav-link" href="{% url 'tur:create' %}">Ders Oluştur</a>
+      </li>
+	  {% endif %}
+    </ul>
+  </div>
+</nav>
+
+<!-- Alt navbar -->
+<nav class="navbar navbar-dark nav-alti py-0">
+  <span class="navbar-text text-white">
+    Python programlama dili, modül, paket ve akrabalarına yönelik yüzlerce ders ve kod örnekleri...
+  </span>
+</nav>

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metalar %}		
+		<meta name="description" content="{{lesson.filtre1}}-{{lesson.headline}} ile ilgili örnek ve açıklamaları içerir.">
+		<meta name="keywords" content=" Python Dersleri, {{lesson.headline}}">
+{% endblock%}
+
+<title>{% block title %} {{lesson.filtre1}}-{{lesson.headline}} {% endblock %}</title>
+
+{% block dil %} <link rel="alternate" hreflang="en" href="https://www.pythonakademi.com{{hreflang}}" /> {% endblock %}
+
+{% block sharethis %}
+	<script async src="https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c&product=sticky-share-buttons"></script>
+	<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d72714eab6f1000123c810c' async='async'></script>
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+	<div class="row">
+	
+	
+		<div class = "col-md-2 col-sm-3 col-xs-12 detailmenu">
+		{% for ders in lessons   %}	
+		<a class="index" href="{{ders.get_absolute_url}}">
+		<h4 class="baslik {% if ders.slug == lesson.slug  %} tik {% endif %}" ><b>{{ders.headline}}</b>
+		</h4>
+		</a> 
+				
+		{%  endfor  %}
+		</div>
+		<div class="col-md-10 col-sm-9 col-xs-12 content">
+			<div class="thumbnail">	
+
+<h2>{{lesson.hreflang_get_absolute_url}}</h1>			
+				<div class = "oklar">
+					<a href="{{previous_lesson.get_absolute_url}}" class="btn btn-success menu" role="button"><</a>
+					<a class="btn btn-warning menu menu1" role="button"><span class="glyphicon glyphicon-bookmark" aria-hidden="true"></span></a>
+					<a href="{{hreflang}}" class = "btn btn-info"><b>EN</b></a>
+					<a href="{{next_lesson.get_absolute_url}}" class="btn btn-success btn-center ikinci menu" role="button">></a>
+		
+				</div>
+					<h3 class ="text-center detailbaslik"> 
+						 
+						<b>{{lesson.number}}. {{lesson.headline}} </b>
+						{% if request.user.is_authenticated %}
+						<a href="{{ lesson.get_update_url }}" class="btn btn-info" role="button">Güncelle</a>
+						{% endif %}
+						
+
+					</h3>
+				
+					{{lesson.content|safe}}
+					<p class = "text-primary text-center"><b>Edit: {{lesson.updating_date|timesince}}</b></p>
+				
+				<div class = "oklar">
+					<a href="{{previous_lesson.get_absolute_url}}" class="btn btn-success" role="button"><</a>
+					<a href="{{next_lesson.get_absolute_url}}" class="btn btn-success ikinci" role="button">></a>
+		
+				</div>
+						{% if request.user.is_authenticated %}
+						<a href="{{ lesson.get_update_url }}" class="btn btn-info" role="button">Güncelle</a>
+						<a href="{{ lesson.get_delete_url }}" class="btn btn-danger" role="button">Sil</a>
+						{% endif %}
+					
+				
+			</div>
+		
+		<div class = "container-fluid">
+			<div class="row">
+			{% for lesson in other_lessons   %}
+				<div class = "col-md-6 col-sm-12 col-xs-12">
+				
+			
+					<div class = "basliklar {{lesson.filtre1}}">
+						<a href="{{lesson.get_absolute_url}}"><h4 class = " abc text-center">{{lesson.headline}}</h4></a>
+					</div>		
+				</div>
+			{%  endfor  %}
+			</div>
+		</div>
+		
+		
+		
+	</div>
+	</div>
+	</div>
+	<script src="{% static 'js/detail/detail.js'%}"></script>
+{% endblock %}
+
+
+
+
+				

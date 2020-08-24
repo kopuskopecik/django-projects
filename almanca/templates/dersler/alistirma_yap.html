@@ -1,0 +1,37 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block body %}
+<div class = "container">
+<div class="progress mt-3 mb-3" style="height: 3px;">
+  <div class="progress-bar bg-success" role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+
+{% for soru in sorular %}
+<div class = "card mt-2" id = "soru{{soru.id}}">
+   <h4 class = "soru_listesi" id = "{{soru.id}}">{{soru.content}}</h4>
+   {% for cevap in soru.answer_set.all %}
+   <button class = "secenekler mb-2 px-2 py-2 border border-dark rounded-pill btn btn-block" id = "{{cevap.id}}" dogru = "{% if cevap.dogru_cevap %}dogru{% else%} yanlis {% endif %}" >{{cevap.content}}</button>
+   {% endfor %}
+   <button class = "onaylama border rounded-pill btn btn-block btn-outline-secondary mb-1" disabled>Kontrol Et</button>
+   <div class = "devamlar d-none py-5" >
+   <button class = "px-5 w-75 mx-auto devam border rounded-pill btn btn-block btn-success mb-1">Devam</button>
+   </div>
+      
+</div>
+{% endfor %}
+<div class = "mt-1 alert alert-success d-none">
+	Tebrikler {{baslik.title}} sorularını başarıyla cevaplandırdınız!!!
+	<a id = "ajax-url" href= "{% url 'dersler:alistirma_sonucu_hesapla' baslik.id %}">Devam Et</a>
+</div>
+
+<p class = "d-none" id = "url-p">{% url "dersler:alistirma_sonucu_hesapla" baslik.id %}</p>
+</div>
+
+{% endblock %}
+
+
+
+{% block javascript %}
+	<script src="{% static 'js/dersler/alistirma_yap.js' %}"></script>
+{% endblock %}

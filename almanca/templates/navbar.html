@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+  <a class="navbar-brand" href="{% url 'home' %}">
+  <i class="fab fa-python"></i>
+	Almanca Dersleri
+  <i class="fab fa-python"></i>
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'dersler:baslik_listesi' %}">Konular<span class="sr-only">(current)</span></a>
+      </li>
+	  {% if user.is_authenticated %}
+	  <li class="nav-item active">
+		<a class="nav-link" href="{% url 'profil:ogrenci_profil' user.id %}">{{ user.username }}<span class="icon-graduation-cap" data-toggle="tooltip" data-placement="right" title="Student profile"></span></a>
+	  </li>
+      {% endif %}
+
+	  {% if user.is_authenticated %}
+			<li class="nav-item active"><a class="nav-link" href="{% url 'hesaplar:logout' %}">Çıkış<span class="sr-only">(current)</span></a></li>
+	  {% else %}
+			<a href="{% url 'hesaplar:login' %}" class="btn btn-light" role="button">Giriş Yap</a>
+            <a href="{% url 'hesaplar:student_signup' %}" class="btn btn-primary" role="button">Kayıt Ol</a>
+      {% endif %}	  
+    </ul>
+  </div>
+</nav>
+
+<!-- Alt navbar -->
+<nav class="navbar navbar-dark nav-alti py-0">
+  <span class="navbar-text text-white">
+    Almanca Gramer Dersleri
+  </span>
+</nav>

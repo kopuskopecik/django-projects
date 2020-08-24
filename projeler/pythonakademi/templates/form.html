@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+
+
+{% block body %}
+
+<div class="container">
+	<div class="row justify-content-md-center justify-content-sm-center justify-content-lg-center mt-3">
+		<div class="col-md-9 col-sm-10 col-lg-10 mb-3">
+			<form name = "q" novalidate>
+				<h1 class = "text-center text-info mb-0">Arama</h1>
+				{{form|crispy}}
+				<input class="btn btn-info btn-block" type="submit" value="Ara">
+			</form>
+		</div>
+	<div class = "col-md-9 col-sm-10 col-lg-10">
+		{% for ders in b%}
+			<p><a href = "{{ders.get_absolute_url}}">{{ders.headline}}</a></p>
+		{% endfor %}
+	</div>
+	</div>
+</div>
+{% endblock %}

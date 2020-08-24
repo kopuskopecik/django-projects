@@ -1,0 +1,17 @@
+degistir(a, b)
+---------
+1. ingilizce/models.py
+
+.hreflang_get_absolute_url
+self.number = b
+-----------------------------------
+2. tur/views
+
+tur_detail
+self.number = b
+
+3. LessonSitemap
+
+[b] olacak
+
+

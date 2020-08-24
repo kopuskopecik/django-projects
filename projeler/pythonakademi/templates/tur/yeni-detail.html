@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{lesson.filtre1}}-{{lesson.headline}} {% endblock %}
+
+{% block metalar %}		
+		<meta name="description" content="{{lesson.filtre1}}-{{lesson.headline}} ile ilgili örnek ve açıklamaları içerir.">
+		<meta name="keywords" content=" Python Dersleri, {{lesson.headline}}">
+{% endblock%}
+
+{% block sharethis %}
+<script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=5d9dd46a171ad100126e2a5a&product=inline-share-buttons' async='async'></script>
+
+{% endblock %}
+
+{% block breadcrumb %}
+<nav aria-label="breadcrumb" class = "breadcrumb-detail">
+  <ol class="breadcrumb mb-0">
+    <li class="breadcrumb-item"><a href="{% url 'tur:index' %}">{{baslik.get_ana_başlık_display}}</a></li>
+    <li class="breadcrumb-item"><a href="{{baslik.get_absolute_url}}">{{baslik.baslik_adi}}</a></li>
+	<li class="breadcrumb-item active" aria-current="page">{{lesson.headline}}</li>
+  </ol>
+</nav>
+{% endblock %}
+
+{% block body %}
+<div class = "container-fluid overflow-hidden">
+	<div class = "row">
+		<div class = "col-md-3 pl-0 mt-0 detailmenu liste">
+			<div class="list-group list-group-flush mt-0">
+			  {% for ders in lessons %}
+				<a href="{{ders.get_absolute_url}}" class="list-group-item list-group-item-action list-group-item-info {% if ders.id ==  lesson.id %}active{% endif %}">{{ders.headline}}</a>
+			  {% endfor %}
+			</div>
+		</div>
+		<div class = "col-md-9 content icerik">
+		  {% if request.user.is_superuser%}
+			<div class = "mt-1">
+				<a href = "{% url 'tur:create' %}" class = "btn btn-success">Ders Ekle</a>
+				<a href = "{{lesson.get_update_url}}" class = "btn btn-danger">Dersi Güncelle</a>
+			</div>
+		  {% endif %}	
+		<article>  
+		  <header>	
+			<h1 class = "text-center text-danger headline">		
+				{{lesson.headline}}				
+			</h1>
+		  </header>
+		   <main>
+				<div>{{lesson.content|safe}}</div>
+		   </main>
+		</article>	
+			<div class = "oklar">
+				<p class = "text-right"><a href="{{lesson.next_lesson.get_absolute_url}}" class="btn btn-success" role="button">{{lesson.next_lesson.headline}} <i class ="fas fa-angle-double-right"></i></a></p>
+				<p class = "text-left"><a href="{{lesson.previous_lesson.get_absolute_url}}" class="btn btn-success" role="button"><i class ="fas fa-angle-double-left"></i> {{lesson.previous_lesson.headline}}</a></p>
+								
+				<p class = "text-center">
+					<a href="{{hreflang}}" class = "btn btn-info btn-sm"><b>for English</b></a>		
+					<button type = "button" class="btn btn-warning btn-sm" data-toggle="tooltip" data-placement="top" title = "Görüntülenme Sayısı"> <i class ="fas fa-eye"></i> {{lesson.views}}</button>
+					<button  type = "button" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title = "Güncellenme Tarihi"> <i class ="far fa-calendar"></i> {{lesson.updating_date|date:"d M y"}}</button>
+			
+				</p>
+				
+				<div class="sharethis-inline-share-buttons mb-1"></div>
+				
+			</div>
+			
+			<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://pythonakademi.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+			
+		</div>
+	</div>
+</div>
+
+<script id="dsq-count-scr" src="//pythonakademi.disqus.com/count.js" async></script>
+
+<script src="{% static 'js/detail/detail.js'%}"></script>
+{% block javascript %}
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})</script> 
+{% endblock %}
+{% endblock %}

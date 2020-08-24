@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block body %}
+<div class = "container-fluid">
+	<ul class="list-group list-group-horizontal-sm mb-2 mt-2">
+		<a href = "{% url 'profil:ogrenci_profil' ogrenci_id %}" class="list-group-item {{active}}">Başlıklarım</a>
+		<a href = "{% url 'profil:derslerim' ogrenci_id %}" class="list-group-item">Derslerim</a>
+		<a href = "{% url 'profil:sorular' ogrenci_id %}" class="list-group-item">Sorularım</a>
+		<a href = "{% url 'profil:favoriler' ogrenci_id %}" class="list-group-item">Favorilerim</a>
+	</ul>
+	{% if sahip_mi %}
+	  <a href = "{% url 'dersler:baslik_olustur' %}" class = "btn btn-sm btn-success mb-1">Yeni Başlık Oluştur</a>
+	{% endif %}
+	<div class="list-group">
+	  {% for baslik in basliklar %}
+		<a href="{{baslik.get_absolute_url}}" id = "{{baslik.id}}" class="list-group-item list-group-item-action list-group-item-success d-flex justify-content-between align-items-center">{{baslik.title}} <span class="badge badge-success badge-pill">{{baslik.ders_sayisi}} ders</span></a>
+	  {% endfor %}
+	</div>
+</div>
+
+{% endblock %}

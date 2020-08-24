@@ -1,0 +1,15 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+
+{% block body %}
+<div class = "container">
+	<p class = "mt-2"><a class = "btn btn-success" href = {% url 'lessons:baslik_olustur' %}>Yeni Başlık oluştur</a></p>
+	{% for baslik in basliklar %}
+		<div class = "card mb-2">
+			<a href = "{{baslik.get_absolute_url}}"><h4>{{baslik.title}}</h4></a>
+			<p>{{baslik.content|linebreaksbr}}</p>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

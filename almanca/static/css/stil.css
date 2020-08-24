@@ -1,0 +1,14 @@
+.content {
+  min-height: calc(100vh - 50px);
+}
+.footer {
+  height: 50px;
+  background-color: #dc3545;
+  color:#fff;
+}
+
+.nav-alti {
+	background-color: hsl(354, 80%, 64%);
+	
+}
+

@@ -1,0 +1,22 @@
+.navbar {
+	margin-bottom:0;
+}
+
+body {
+	background-color: orange;
+	padding-top:50px;
+	font-family: 'Arial'
+}
+
+.index {
+	background-color:black;
+	color:white;
+}
+
+.content {
+	padding-right: 0;
+    padding-left: 0;
+}
+hr{
+	border-top: 1px solid #262244;
+}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {{product.name}}
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-md-center">
+<div class = "col-md-5">
+<div class="card text-center mt-3">
+  <div class="card-header">
+    {{product.category}}
+  </div>
+  <img class="card-img-top" src="{{product.image.url}}" alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{product.name}}</h5>
+    <p class="card-text">{{product.description}}</p>
+	<form class = "form mx-auto" action="{% url 'cart:cart_add' product.id %}" method="post">
+    {% csrf_token %}
+      {% include 'includes/form3.html' %}
+      <input type="submit" value="add to cart" class="btn btn-sm btn-primary ml-2">
+    </form>
+  </div>
+  <div class="card-footer text-muted">
+    {{product.price}} tl
+  </div>
+</div>
+</div>
+</div>
+{% endblock %}

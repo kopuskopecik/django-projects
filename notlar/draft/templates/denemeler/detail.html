@@ -1,0 +1,27 @@
+
+{% if messages %}
+<p>{{messages}}</p>
+<ul class="messages">
+{% for message in messages %}
+
+<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }} {{DEFAULT_MESSAGE_LEVELS}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+<h1>Merhaba burası detail sayfası</h1>
+<h1>Kullanıcı {{user}}</h1>
+
+<h2> object'e ait isim : {{object.name}}</h2>
+<h2>article'ye ait isim: {{article.name}}</h2>
+<h2><a href = "{% url 'denemeler:update' object.slug %}"> Güncelle </a></h2>
+
+<hr>
+<hr>
+<h2>Derslere ait : {{dersler.headline}}</h2>
+<h2>Derslere ait : {{object.headline}}</h2>
+
+{{now}}
+
+<p>{{a}}</p>
+
